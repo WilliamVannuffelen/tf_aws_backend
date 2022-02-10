@@ -30,7 +30,7 @@ resource "aws_resourcegroups_group" "resourcegroups_group" {
     }
 }
 
-resource "aws_kms_key" "kms-key" {
+resource "aws_kms_key" "kms_key" {
     tags = {
         ResourceGroup = local.namespace
     }
@@ -56,7 +56,7 @@ resource "aws_s3_bucket" "s3_bucket" {
     }
 }
 
-resource "aws_s3_bucket_public_accesss_block" "s3_bucket" {
+resource "aws_s3_bucket_public_access_block" "s3_bucket" {
     bucket = aws_s3_bucket.s3_bucket.id
 
     block_public_acls = true
@@ -69,7 +69,7 @@ resource "aws_dynamodb_table" "dynamodb_table" {
     name = "${local.namespace}-state-lock"
     hash_key = "LockID"
     billing_mode = "PAY_PER_REQUEST"
-    attribute = {
+    attribute {
         name = "LockID"
         type = "S"
     }
